@@ -1,0 +1,266 @@
+/* === Modern Glassy Redesign === */
+
+:root {
+  --primary: #6c63ff;
+  --secondary: #ff6584;
+  --bg-dark: #0e0e10;
+  --bg-light: #f7f8fc;
+  --text-dark: #1e1e2f;
+  --text-light: #f1f1f1;
+  --glass-bg-dark: rgba(255, 255, 255, 0.08);
+  --glass-bg-light: rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.app-container.dark {
+  background: radial-gradient(circle at top left, #1e1e2f, #0e0e10);
+  color: var(--text-light);
+}
+
+.app-container.light {
+  background: linear-gradient(to bottom right, #ffffff, #e4e7f2);
+  color: var(--text-dark);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  padding: 0 1.5rem;
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+}
+
+.app-container.dark .navbar {
+  background: var(--glass-bg-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-container.light .navbar {
+  background: var(--glass-bg-light);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Brand */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand .logo {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.app-container.dark .navbar-brand span {
+  color: var(--primary);
+}
+
+.app-container.light .navbar-brand span {
+  color: var(--secondary);
+}
+
+/* Project Name */
+.navbar-project {
+  flex: 1;
+  text-align: center;
+}
+
+.project-name {
+  font-size: 1.15rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.project-name:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.project-name-input {
+  font-size: 1.15rem;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  width: 220px;
+  transition: 0.3s;
+}
+
+.app-container.dark .project-name-input {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.app-container.light .project-name-input {
+  background: rgba(0, 0, 0, 0.05);
+  color: #222;
+}
+
+/* Navbar Controls */
+.navbar-controls button {
+  border: none;
+  outline: none;
+  margin-right: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.navbar-controls button:hover {
+  transform: translateY(-2px);
+}
+
+.app-container.dark .navbar-controls button {
+  background: var(--primary);
+  color: #fff;
+}
+
+.app-container.light .navbar-controls button {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.navbar-controls .project-id {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-left: 10px;
+}
+
+/* Workspace */
+.workspace {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  flex: 1;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* File Explorer */
+.file-explorer {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+  padding: 10px;
+  transition: background 0.3s ease;
+}
+
+.app-container.dark .file-explorer {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.app-container.light .file-explorer {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Editor Area */
+.editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.editor-sandpack {
+  display: flex;
+  flex: 1;
+  border-radius: 0 0 10px 0;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.sandpack-code-editor,
+.sandpack-preview {
+  flex: 1;
+  overflow: auto;
+}
+
+.sandpack-preview {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Autosave Popup */
+.autosave-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 1.8s ease forwards;
+  z-index: 1000;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 1fr;
+  }
+
+  .file-explorer {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-controls button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .navbar-project {
+    display: none;
+  }
+}
